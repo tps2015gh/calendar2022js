@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div.box {
+        border:1px solid silver ;
+        background-color: lightyellow;
+        padding: 5px;
+        margin-top: 5px;
+        
+    }
+</style>
+<script type="module" >
+    import * as snc from './subnetcalc.js';
+    window.page1 = new snc.Page1();
+</script>
+<body onload="page1.onload()" >
+
+    <div  class="box">192.1.1.0/
+        <input type="number" min="1" max="32" onchange="page1.on_maskchange(this)" name="mask" id="mask">
+    </div>
+    <br>
+    <div class="box">
+        3. คำนวณจำนวน IP สำหรับ Host : 
+        <div id="calc_ip_count">...</div>
+    </div>
+    <div class="box">
+        4. หา subnet mask : (32 bit )
+        <br>  - ตำแหน่งที่ใช้เป็น Subnet  =  1  
+        <br>  - ตำแหน่งที่ใช้ Host =  0 
+         
+        <div id="calc_mask">...</div>
+    </div>
+
+    <br><br>
+    <div>
+        ref :  
+        <a href="https://msit5.wordpress.com/2013/09/04/%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%B3%E0%B8%99%E0%B8%A7%E0%B8%93-subnet-mask/">REF #1</a>
+    </div>
+</body>
+</html>
