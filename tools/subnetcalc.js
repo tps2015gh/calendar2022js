@@ -7,6 +7,7 @@ class Page1{
         this.setMask (28)
     }
     setMask( num ){
+        
         let m = document.querySelector("#mask")
         m.value = num
         this.masknum = num
