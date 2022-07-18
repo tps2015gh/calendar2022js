@@ -95,7 +95,7 @@ class Calendar2022js {
 
         //=======================================
         let dYearMonth = ElBuilder.newDiv();
-        dYearMonth.innerHTML = "<h1>y: " +  this.year + " ,m:" + this.month + " </h1>";
+        dYearMonth.innerHTML = "<h1>year: " +  this.year + " ,month:" + this.month + " </h1>";
         div1.append(dYearMonth)
 
         //=======================================
