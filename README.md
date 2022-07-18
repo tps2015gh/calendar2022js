@@ -10,3 +10,7 @@ ES6
 == Folder 
 src     for source code 
 dest    for destination folder
+
+===============================
+setup npm on ubuntu 20.xx  (wsl2 ) look this link 
+.. (next )
