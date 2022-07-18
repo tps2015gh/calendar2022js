@@ -25,6 +25,15 @@ class Calendar2022js {
         this.month = month;
     }
     //===========================================
+    set_year_month_now() {
+        let dt = new Date();
+        // console.log( dt );
+        // console.log(  dt.getFullYear() ); 
+        // console.log( dt.getMonth() + 1 ); 
+        this.year = dt.getFullYear();
+        this.month = dt.getMonth() + 1;
+    }
+    //===========================================
     set_root(selector) {
         console.log(" > call set_root() " + selector);
         let el = document.querySelector(selector);
@@ -43,11 +52,12 @@ class Calendar2022js {
         let startcount = false;
         const START_CELL = CalendarModelInfo.getFirstDateNumberOfMonth(this.year, this.month);
         const DAY_IN_MONTH = 31;
+        console.assert(START_CELL < 10);
         for (let rowi = 1; (rowi <= 6) && (daynum < DAY_IN_MONTH); rowi++) {
             // if( ){ break ; /* exit rowi */ }
             let tr1 = ElBuilder.newTr();
             for (let celli = 1; celli <= 7; celli++) {
-                if (rowi == 1 && celli == START_CELL) {
+                if ((rowi == 1) && (celli == START_CELL)) {
                     startcount = true;
                 }
                 if (startcount) {
@@ -58,11 +68,18 @@ class Calendar2022js {
                     c1.innerHTML = "r" + rowi + ".c" + celli + "<br>";
                 }
                 else {
-                    c1.innerHTML = "r" + rowi + ".c" + celli + "<br>" + "dn: " + daynum + ",sc:" + startcount;
+                    c1.innerHTML = "r" + rowi + ".c" + celli
+                        + "<br>" + "dn: "
+                        + daynum + ",sc:" + startcount
+                        + "<br> dayname : "
+                        + CalendarModelInfo.getDayName(this.year, this.month, daynum)
+                        + "<br> dt : "
+                        + CalendarModelInfo.getDateString(this.year, this.month, daynum);
                 }
                 c1.setAttribute("xrow", "" + rowi);
                 c1.setAttribute("xcell", "" + celli);
-                c1.setAttribute("daynum", "99");
+                c1.setAttribute("daynum", "" + daynum);
+                c1.setAttribute("dayname", CalendarModelInfo.getDayName(this.year, this.month, daynum));
                 tr1.appendChild(c1);
                 //============================= 
             }
@@ -82,7 +99,9 @@ class Calendar2022js {
         // this.root.append(tb1 )
         //=======================================
         let dYearMonth = ElBuilder.newDiv();
-        dYearMonth.innerHTML = "<h1>year: " + this.year + " ,month:" + this.month + " </h1>";
+        dYearMonth.innerHTML = "<h1>year: " + this.year + " ,month:" + this.month + " </h1>"
+            + "date number (1-7 ) : "
+            + CalendarModelInfo.getFirstDateNumberOfMonth(this.year, this.month);
         div1.append(dYearMonth);
         //=======================================
         // add Table 
@@ -132,11 +151,39 @@ class CalendarCell {
 //================================================================
 class CalendarModelInfo {
     //===========================================
+    /**
+     *
+     * @param year
+     * @param month
+     * @returns number
+     * @see
+     *      https://www.codegrepper.com/code-examples/javascript/get+day+number+from+date+javascript
+     */
     static getFirstDateNumberOfMonth(year, month) {
-        return 5;
+        // let dt1 = new Date(year, month, 1, 0, 0, 0, 0);
+        let dt1 = new Date(2022, 0, 1);
+        return dt1.getUTCDay();
     }
     static getDaysInMonth(year, month) {
-        return new Date(year, month, 0).getDate();
+        return new Date(year, month - 1, 0).getDate();
+    }
+    static getDateString(year, month, day) {
+        let a = new Date(year, month - 1, day);
+        let r = a.toString();
+        return r;
+    }
+    static getDayName(year, month, day) {
+        let a = new Date(year, month - 1, day);
+        let weekdays = new Array(7);
+        weekdays[0] = "Sunday";
+        weekdays[1] = "Monday";
+        weekdays[2] = "Tuesday";
+        weekdays[3] = "Wednesday";
+        weekdays[4] = "Thursday";
+        weekdays[5] = "Friday";
+        weekdays[6] = "Saturday";
+        let r = weekdays[a.getDay()];
+        return r;
     }
 }
 //========================
