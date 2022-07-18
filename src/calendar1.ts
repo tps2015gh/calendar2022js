@@ -57,12 +57,12 @@ class Calendar2022js {
      * 
      * @param div1  container for table
      */
-    paint_days( div1 : HTMLDivElement){
+    private paint_days( div1 : HTMLDivElement){
         let t1 = ElBuilder.newTableNoTr();
         let daynum = 0 ;
         let startcount = false ;
         const START_CELL =  CalendarModelInfo.getFirstDateNumberOfMonth(this.year, this.month) ;
-        const DAY_IN_MONTH = 31;
+        const DAY_IN_MONTH = CalendarModelInfo.getDaysInMonth(this.year,this.month );
         
         console.assert(  START_CELL < 10 );
 

@@ -51,7 +51,7 @@ class Calendar2022js {
         let daynum = 0;
         let startcount = false;
         const START_CELL = CalendarModelInfo.getFirstDateNumberOfMonth(this.year, this.month);
-        const DAY_IN_MONTH = 31;
+        const DAY_IN_MONTH = CalendarModelInfo.getDaysInMonth(this.year, this.month);
         console.assert(START_CELL < 10);
         for (let rowi = 1; (rowi <= 6) && (daynum < DAY_IN_MONTH); rowi++) {
             // if( ){ break ; /* exit rowi */ }
