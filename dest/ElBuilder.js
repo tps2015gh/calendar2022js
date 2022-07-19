@@ -12,6 +12,12 @@ class ElBuilder {
         d.innerHTML = "@newdiv";
         return d;
     }
+    static newLabel(forWhatId) {
+        let el = document.createElement("label");
+        el.innerHTML = "@label";
+        el.setAttribute("for", forWhatId);
+        return el;
+    }
     static newTableNoTr() {
         let t = document.createElement("table");
         t.setAttribute("border", "2");
@@ -25,6 +31,19 @@ class ElBuilder {
         let t = document.createElement("td");
         t.setAttribute("border", "2");
         return t;
+    }
+    static newDropDown(value, mp) {
+        let s = document.createElement("select");
+        mp.forEach((val, key) => {
+            let op = document.createElement("option");
+            op.innerHTML = key + "/" + val;
+            op.value = "" + val;
+            if (val == value) {
+                op.selected = true;
+            }
+            s.appendChild(op);
+        });
+        return s;
     }
 }
 //================================================================
