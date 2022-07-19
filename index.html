@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script type="module">
+    import * as calendar200js from './dest/calendar1.js';
+    
+    window.load1 = function () {
+        //document.querySelector("#c1")
+        //c1.innerHTML = "OK2";
+        // console.log("OK2");
+        //=======================================
+        let cal1 =  new calendar200js.Calendar2022js();
+        cal1.set_root("#c1");
+        cal1.show_month_selector();
+    
+        cal1.set_year_month(2022,6);
+        cal1.set_year_month_now();
+
+ 
+        cal1.paint();
+    }// 
+</script>
+
+<body onload="load1()">
+
+    <script>
+    </script>
+
+    <div id="c1">@1.ab</div>
+</body>
+
+</html>
