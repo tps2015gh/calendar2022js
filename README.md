@@ -13,7 +13,7 @@
   - MarkDown Preview Enhanced
   - MarkDown All in One
   - JavaScript (ES6) code snippets 
-  - 
+  
 - install node.js 
 - install npm on node js  
 - install typescript --save-dev

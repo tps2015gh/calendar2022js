@@ -50,6 +50,45 @@ class Calendar2022js {
         this.tb1 = new CalendarTable(this.root);
     }
     //===========================================
+    setCellText_daynum0(c1, rowi, celli, text) {
+        c1.innerHTML = "r" + rowi + ".c" + celli + "<br>"
+            + "<div style='color:red;'>@: " + text + "</div>";
+        c1.style.backgroundColor = "lightcyan";
+    }
+    //===========================================
+    setCellText_daynumNextMonth(c1, rowi, celli, text, daynum, show_debug) {
+        c1.innerHTML = // "r" + rowi + ".c" + celli + "<br>"
+            // + "<div style='color:red;'>@: " + text + "</div>";
+            ""
+                + "<div style=''color:red;>" + daynum + "</div>";
+        c1.style.backgroundColor = "lightcyan";
+    }
+    //===========================================
+    setCellText_daynumInMonth(c1, rowi, celli, text, daynum, startcount, show_debug) {
+        if (show_debug) {
+            c1.innerHTML = "r" + rowi + ".c" + celli
+                + "<br>" + "dn: "
+                + daynum + ",sc:" + startcount
+                + "<br> dayname : "
+                + CalendarModelInfo.getDayName(this.year, this.month, daynum)
+                + "<br> dt : "
+                + CalendarModelInfo.getDateString(this.year, this.month, daynum)
+                + "<div style='color:red;'>@: " + this.days_layout[celli] + "</div>";
+        }
+        else {
+            c1.innerHTML = // "r" + rowi + ".c" + celli
+                // + "<br>" + "dn: "+ daynum
+                ""
+                    + "<span>" + daynum + "</span>"
+                    // + ",sc:" + startcount
+                    // + "<br> dayname : "
+                    // + CalendarModelInfo.getDayName(this.year, this.month, daynum)
+                    // + "<br> dt : "
+                    // + CalendarModelInfo.getDateString(this.year, this.month, daynum)
+                    + "<div style='color:red;'>@: " + this.days_layout[celli] + "</div>";
+        }
+    }
+    //===========================================
     /**
      *
      * @param div1  container for table
@@ -78,24 +117,15 @@ class Calendar2022js {
                 }
                 let c1 = ElBuilder.newTd();
                 if (daynum == 0) {
-                    c1.innerHTML = "r" + rowi + ".c" + celli + "<br>"
-                        + "<div style='color:red;'>@: " + this.days_layout[celli] + "</div>";
-                    c1.style.backgroundColor = "lightcyan";
+                    this.setCellText_daynum0(c1, rowi, celli, this.days_layout[celli]);
                 }
                 else if (daynum > DAY_IN_MONTH) {
-                    c1.innerHTML = "r" + rowi + ".c" + celli + "<br>"
-                        + "<div style='color:red;'>@: " + this.days_layout[celli] + "</div>";
-                    c1.style.backgroundColor = "lightcyan";
+                    let show_debug = false;
+                    this.setCellText_daynumNextMonth(c1, rowi, celli, this.days_layout[celli], daynum - DAY_IN_MONTH, show_debug);
                 }
                 else {
-                    c1.innerHTML = "r" + rowi + ".c" + celli
-                        + "<br>" + "dn: "
-                        + daynum + ",sc:" + startcount
-                        + "<br> dayname : "
-                        + CalendarModelInfo.getDayName(this.year, this.month, daynum)
-                        + "<br> dt : "
-                        + CalendarModelInfo.getDateString(this.year, this.month, daynum)
-                        + "<div style='color:red;'>@: " + this.days_layout[celli] + "</div>";
+                    let show_debug = false;
+                    this.setCellText_daynumInMonth(c1, rowi, celli, this.days_layout[celli], daynum, startcount, show_debug);
                 }
                 c1.setAttribute("xrow", "" + rowi);
                 c1.setAttribute("xcell", "" + celli);
